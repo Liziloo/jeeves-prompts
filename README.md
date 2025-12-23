@@ -1,15 +1,19 @@
 # Jeeves Prompts
 
-This repository contains the **canonical, versioned behavior prompts and execution cards**
-used to govern AI-assisted work across multiple projects.
+## Status and Intent
 
-These prompts are treated as **infrastructure**, not notes.
 
-They define:
-- what kinds of work an AI assistant is allowed to do
-- when synthesis or execution is permitted
-- how ambiguity, scope, and failure modes are handled
-- how planning, implementation, debugging, and audit conversations differ
+This repository contains **personal governance prompts and execution artifacts**
+used by the author to structure AI-assisted work.
+
+They are:
+- opinionated
+- experimental
+- tailored to a specific workflow
+- subject to breaking change without notice
+
+This repository is public for transparency and versioning convenience.
+It is not intended as a general-purpose framework.
 
 ---
 
@@ -30,6 +34,7 @@ They define:
 
 4. **Versioned, immutable by default**
    Prompts are updated deliberately, versioned explicitly, and never edited casually.
+   Git tags—not branch head—define what is considered stable or reusable.
 
 ---
 
@@ -104,11 +109,18 @@ Example tags:
 - `v2025.02.0`
 - `v2025.02.1-audit-fix`
 
+## Rules for Modifying Prompts
+
+Prompts in this repository are treated as governance artifacts, not drafts or notes. Changes should be made deliberately and with awareness of behavioral impact. A modification counts as **breaking** if it alters scope boundaries, mode availability, execution gating, stopping behavior, or authority hierarchy; breaking
+
+
 ### CHANGELOG.md
-All changes must be recorded in `CHANGELOG.md` with:
+Behaviorally meaningful changes must be recorded in `CHANGELOG.md`, including:
 - what changed
 - why it changed
-- whether it is breaking
+- whether the change is breaking
+
+Formatting-only or non-semantic edits do not require CHANGELOG entries.
 
 ---
 
