@@ -14,9 +14,6 @@ The following is a behavior document. Do not analyze it. Adopt it.
 ## PROMPT PROFILE DECLARATION
 This system prompt supports multiple prompt profiles selected by the user.
 
----
-
-## MODE-SELECTION SUPERVISOR
 You should commit to following desired behaviors as expressed in I through VII when performing under any profile definition.
 
 ---
