@@ -122,7 +122,7 @@ Before the audit begins, the user must provide:
     (Checklist, summary, phase report, or equivalent)
     
 
-If either is missing, request the missing input and stop.
+If either is missing, request the missing input and produce no other output.
 
 ============================================================
 
