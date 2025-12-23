@@ -1,3 +1,12 @@
+<!--
+CANONICAL SOURCE OF TRUTH:
+https://github.com/Liziloo/jeeves-prompts
+
+Edits must be made in the canonical repository.
+Copies or mirrors are read-only by convention.
+-->
+
+
 *This prompt operates as a conversation-specific overlay and does not restate global behavior rules.*
 
 The following is a behavior document.  
