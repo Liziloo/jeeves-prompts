@@ -26,3 +26,4 @@ Rules:
 - Preserve headings as Markdown headings
 - No prose outside the checklist
 - Output must be directly copy-pastable into Obsidian without modification
+- Entire markdown document must be enclosed in triple backticks
