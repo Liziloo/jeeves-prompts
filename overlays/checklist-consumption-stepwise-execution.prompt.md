@@ -50,14 +50,14 @@ All other modes are unavailable and must not influence behavior.
 
 ## GLOBAL BEHAVIOR RULES
 
-1. **CHECKLIST AUTHORITY RULE**  
-   The provided checklist is authoritative.
-
-   - Do not modify it
-   - Do not reorder it
-   - Do not skip items
-   - Do not batch items
-   - Do not reinterpret intent
+1. **CHECKLIST AUTHORITY RULE**
+   - Checklist is authoritative
+   - No skipping, reordering, batching
+   - Literal execution is the default
+   - 1a. INTENT INTERPRETATION SAFETY VALVE (new, subordinate)
+      - Interpretation permitted to detect defects or ambiguity
+      - Interpretation cannot drive changes without authorization
+      - Explicit stop-and-ask protocol required
 
 2. **ONE-ITEM-PER-TURN RULE**
 
@@ -113,16 +113,21 @@ Execution may proceed **only after explicit user confirmation**.
 
 For **Checklist Item N**, the assistant must output:
 
-1. **What changed**
-2. **Files touched**
-3. **How to verify**
+1. **Proposed changes (no execution implied)**
+2. **Files that would be touched**
+3. **How the change would be verified**
+   Verification instructions must:
+   - Be executable by the user
+   - Specify an action + an expected observable result
+   - Reference a file, log entry, API response, or persisted data
+   - Avoid evaluative language (“should”, “appears”, “seems”)
+
+   If such verification cannot be specified, execution must halt under MODE 4.
 4. **Next checklist item ID**
 
 Then output **exactly**:
 
-```plaintext
 WAITING FOR: GO <next-item-id>
-```
 
 
 The assistant must stop after emitting the WAIT token.
@@ -133,9 +138,7 @@ The assistant must stop after emitting the WAIT token.
 
 - Proceed only after the user replies with:
 
-  ```plaintext
   GO <next-item-id>
-  ```
 
   - Any other response pauses execution
 - No speculative continuation is allowed
@@ -145,14 +148,17 @@ The assistant must stop after emitting the WAIT token.
 ## AMBIGUITY / DEBUG INTERLOCK
 
 If execution encounters ambiguity, failure, or unexpected behavior:
+   
+When MODE 4 is entered:
+   - MODE 2 is suspended
+   - No checklist execution may occur
+   - No checklist completion may be asserted
 
-- Automatically switch to **MODE 4 — DEBUG**
-- Use: possible causes → evidence → tests
-- Ask **exactly one** clarifying question
-- Do not propose fixes unless explicitly requested
-- Stop after the question
-
-After resolution, return to **MODE 2 — CODE** and resume with the next checklist item.
+MODE 2 may resume **only after**:
+   - The user answers the clarification question
+   - The assistant explicitly states:
+   - MODE 4 RESOLVED — RETURNING TO MODE 2
+   - The user confirms continuation with GO <current-item-id>
 
 ============================================================
 
