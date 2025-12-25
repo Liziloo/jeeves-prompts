@@ -91,6 +91,10 @@ Before execution begins, the user must provide:
 
 1. **Authoritative checklist** (explicitly labeled as locked)
 2. **Canonical codebase reference** (repo, branch, or snapshot)
+   - Canonical codebase references are locators only and carry no authority unless
+corresponding file contents have been materialized and verified via the
+File Materialization Gate.
+
 3. **Explicit execution authorization**
 
 If any required input is missing, request **one** clarifying item and stop.
