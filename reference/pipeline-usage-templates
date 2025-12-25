@@ -1,0 +1,181 @@
+# Jeeves Pipeline — Usage Templates (Operational)
+
+These templates describe **how to use** the Jeeves formal pipeline in practice.
+They are operational scripts, not design rationale.
+
+---
+
+## TEMPLATE 1 — Project / Phase Planning Session
+
+**Purpose:** Produce or revise governance artifacts only  
+**Outputs:** Phase map, phase charter, or phase checklist  
+**Never executes code**
+
+**Use when:** Deciding *what* to do, not *doing it*
+
+### Conversation start
+1. Paste **Unified System Prompt**
+2. Paste **one planning overlay only**
+   - Project-wide checklist rebase **or**
+   - Project-to-phase decomposition **or**
+   - Phase-level checklist generation
+
+### Rules
+- Produce exactly one artifact
+- Confirm accuracy
+- Explicitly mark output as **LOCKED**
+- Do **not** transition into file discovery or execution
+
+### End condition
+> Confirmed. Artifact is locked.
+
+**End the conversation.**
+
+---
+
+## TEMPLATE 2 — Execution Session (Happy Path)
+
+**Purpose:** Execute a locked checklist safely  
+**Outputs:** Stepwise changes + verification  
+**Constraint:** One checklist item per turn
+
+### Phase 1 — Orientation
+
+**Conversation start**
+1. Paste **Unified System Prompt**
+2. Paste **File Discovery & Access Negotiation Prompt**
+
+**You provide**
+- Directory snapshot
+- Canonical Phase Charter
+
+**Loop**
+- Assistant requests one file
+- You provide or deny
+- Repeat
+
+**Terminate discovery explicitly**
+> File discovery is complete.
+
+(ACCESS_MANIFEST is emitted automatically.)
+
+---
+
+### Phase 2 — Execution Entry
+
+In the **same conversation**:
+1. Paste **Checklist Consumption & Stepwise Execution Prompt**
+2. Provide:
+   - Locked checklist
+   - Explicit execution authorization
+
+The system runs the **File Materialization Gate**.
+
+---
+
+### Phase 3 — Comprehension
+
+If eligible:
+- Assistant summarizes *only* materialized files
+- No changes proposed
+
+You respond:
+> Proceed.
+
+---
+
+### Phase 4 — Stepwise Execution
+
+For each checklist item:
+
+Assistant outputs:
+- Proposed changes
+- Files touched
+- Verification instructions
+- `WAITING FOR: GO <item-id>`
+
+You respond:
+> GO <item-id>
+
+Repeat until complete.
+
+---
+
+### End condition
+
+Checklist completes → closure summary emitted  
+**End the conversation.**
+
+---
+
+## TEMPLATE 3 — Execution Session (Blocked / Missing File)
+
+**Use when:** File Materialization Gate returns `eligible: no`
+
+**Assistant**
+- Requests exactly one missing file
+- Stops
+
+**You choose**
+- Provide file → **restart execution session** (recommended)
+- Abort execution → end conversation
+
+**Rule:** Missing files require a new execution session.
+
+---
+
+## TEMPLATE 4 — Debug Interlock (MODE 4)
+
+**Use when:** Ambiguity or failure appears mid-execution
+
+**Behavior**
+- MODE 2 suspends automatically
+- Assistant asks exactly one clarifying question
+
+**You**
+- Answer the question only
+- Do not replan
+
+Assistant responds:
+> MODE 4 RESOLVED — RETURNING TO MODE 2
+
+You confirm:
+> GO <current-item-id>
+
+Execution resumes.
+
+---
+
+## TEMPLATE 5 — Emergency Abort / Scope Change
+
+**Abort immediately if**
+- Checklist is wrong
+- Files outside manifest must change
+- You feel tempted to “just tweak something”
+
+**Say**
+> Stop. Execution aborted.
+
+**End the conversation.**
+
+Start a new **planning session**.
+
+---
+
+## TEMPLATE 6 — Fast Mental Checklist
+
+Before every session, ask:
+
+1. Am I **planning** or **executing**?
+2. Is the checklist **locked**?
+3. Do I need files **before** thinking?
+4. Would continuing violate an overlay boundary?
+
+If unsure → stop and restart correctly.
+
+---
+
+## Operational Principle
+
+Ending a conversation is not failure.  
+It is **protocol compliance**.
