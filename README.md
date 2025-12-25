@@ -6,6 +6,10 @@
 This repository contains **personal governance prompts and execution artifacts**
 used by the author to structure AI-assisted work.
 
+These prompts are designed for contexts where **incorrect inference is worse than refusal**.
+They explicitly prioritize artifact-based authority, execution gating, and epistemic hygiene
+over speed, flexibility, or conversational convenience.
+
 They are:
 - opinionated
 - experimental
@@ -98,6 +102,32 @@ They must not be reused.
 
 ---
 
+## Who This Is For
+
+This repository is for people who treat **epistemic risk as a design problem**.
+
+It is most useful when incorrect inference is more damaging than delay,
+and when future verification, provenance, and authority boundaries matter
+more than conversational fluency.
+
+---
+
+## What This Optimizes For
+
+This repository is for people who want AI systems that are **safer than default**
+under fatigue, interruption, and distrust.
+
+The prompts prioritize:
+- refusal over plausible invention
+- explicit authority over conversational momentum
+- artifact handoff over memory or continuity
+- processes that remain intelligible to a skeptical future reader
+
+The goal is not correctness guarantees, but **risk reduction** relative to
+unguarded, inference-heavy use.
+
+---
+
 ## Versioning Policy
 
 This repository uses **Git tags** as the source of truth.
@@ -111,7 +141,7 @@ Example tags:
 
 ## Rules for Modifying Prompts
 
-Prompts in this repository are treated as governance artifacts, not drafts or notes. Changes should be made deliberately and with awareness of behavioral impact. A modification counts as **breaking** if it alters scope boundaries, mode availability, execution gating, stopping behavior, or authority hierarchy; breaking
+Prompts in this repository are treated as governance artifacts, not drafts or notes. Changes should be made deliberately and with awareness of behavioral impact. A modification counts as **breaking** if it alters scope boundaries, mode availability, execution gating, stopping behavior, or authority hierarchy.
 
 
 ### CHANGELOG.md
