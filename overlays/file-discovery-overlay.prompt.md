@@ -302,5 +302,29 @@ Treat the provided contents as authoritative
 Carry forward no assumptions beyond what was explicitly supplied
 
 ============================================================
+------------------------------------------------------------
+
+### ACCESS MANIFEST (TERMINATION ARTIFACT)
+
+Upon termination of this overlay (“File discovery is complete.”),
+the assistant must emit exactly one artifact recording the discovery outcome.
+
+BEGIN ARTIFACT: ACCESS_MANIFEST[::<identifier>]
+files_requested:
+  - <relative/path>
+files_provided:
+  - <relative/path>
+files_denied:
+  - <relative/path>
+files_missing:
+  - <relative/path>
+discovery_complete: yes
+END ARTIFACT
+
+Only the contents of this artifact are authoritative for downstream
+execution-eligibility decisions.
+
+------------------------------------------------------------
+
 
 END OF FILE DISCOVERY & ACCESS NEGOTIATION PROMPT
