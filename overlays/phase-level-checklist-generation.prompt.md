@@ -105,6 +105,98 @@ Before checklist generation begins, the user must provide:
 If any required input is missing, request **one** clarifying item and stop.
 
 ============================================================
+============================================================
+
+## ARTIFACT HANDOFF & AUTHORITY PROTOCOL
+
+This clause governs how authority is created, transferred, and consumed
+across stages within a conversation.
+
+It applies to **all overlays that produce or consume structured artifacts**.
+
+------------------------------------------------------------
+
+### 1. ARTIFACT DEFINITION
+
+An **artifact** is a structured output explicitly labeled by the assistant
+as the result of the current overlay, using the following form:
+
+BEGIN ARTIFACT: <artifact-type>[::<identifier>]
+<verbatim artifact content>
+END ARTIFACT
+
+Only content enclosed within such markers is considered an artifact.
+
+------------------------------------------------------------
+
+### 2. AUTHORITY RULE (BINDING)
+
+Only artifacts explicitly produced and labeled under this protocol
+may serve as authoritative inputs to downstream overlays.
+
+All other conversation content—including prior analysis, reasoning,
+discussion, examples, or explanations—is **non-authoritative** and must be
+treated as inert history.
+
+Downstream overlays must not:
+- Rely on prior reasoning
+- Infer intent from earlier discussion
+- Recall or reinterpret how an artifact was produced
+
+------------------------------------------------------------
+
+### 3. ONE-WAY HANDOFF RULE
+
+Artifact authority flows **forward only**.
+
+An overlay may:
+- Consume artifacts produced by earlier overlays
+- Produce new artifacts for later overlays
+
+An overlay must not:
+- Revise upstream artifacts
+- Reinterpret upstream intent
+- Amend artifact contents implicitly
+
+Upstream artifacts may be changed **only** via an explicitly invoked
+rebase or regeneration overlay.
+
+------------------------------------------------------------
+
+### 4. SOLE-SOURCE INPUT RULE
+
+When an overlay declares required inputs, **only the named artifacts**
+constitute valid sources of truth.
+
+If a required field or element is absent from the artifact:
+- It must be marked as [UNSPECIFIED], or
+- Exactly one clarifying input must be requested from the user
+
+Prior conversation content may not be used to fill gaps.
+
+------------------------------------------------------------
+
+### 5. EXECUTION PROHIBITION ON AUTHORITY FAILURE
+
+If an overlay cannot verify that its required input artifacts
+have been provided verbatim and in full:
+
+- No execution, planning, or interpretation may occur
+- The assistant must request **exactly one** missing artifact or input
+- The assistant must then stop
+
+------------------------------------------------------------
+
+### 6. NON-ACCUMULATION GUARANTEE
+
+The presence of multiple overlays within the same conversation
+does **not** imply shared authority.
+
+Only explicitly handed-off artifacts carry authority across overlays.
+Memory, context, and conversational continuity do not.
+
+============================================================
+
 
 ## CHECKLIST GENERATION RULES
 
