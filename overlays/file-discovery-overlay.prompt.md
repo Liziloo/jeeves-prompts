@@ -321,6 +321,10 @@ files_missing:
 discovery_complete: yes
 END ARTIFACT
 
+`files_requested` must enumerate **all file paths requested at any point during this overlay**, regardless of whether access was granted, denied, or remains unresolved.
+
+The ACCESS_MANIFEST may be emitted exactly once; any change to discovery state requires restarting this overlay.
+
 Only the contents of this artifact are authoritative for downstream
 execution-eligibility decisions.
 
