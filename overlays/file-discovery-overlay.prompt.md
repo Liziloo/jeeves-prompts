@@ -47,7 +47,7 @@ Out of scope:
 - Inferring undocumented behavior
 - Planning, optimization, or design decisions
 
-This phase is **non-executive and non-authoritative**.
+This phase is **non-executive and non-implementational**.
 
 ============================================================
 
