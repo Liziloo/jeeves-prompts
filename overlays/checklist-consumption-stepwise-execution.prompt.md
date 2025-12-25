@@ -189,6 +189,116 @@ Memory, context, and conversational continuity do not.
 
 ============================================================
 
+## FILE MATERIALIZATION GATE
+
+This gate governs **execution eligibility**.
+
+It determines whether execution-oriented overlays may be activated,
+based solely on materialized files and locked artifacts.
+
+This gate is **non-executive** and **non-planning**.
+
+This gate must be satisfied before the Mandatory Comprehension Gate may be entered.
+
+------------------------------------------------------------
+
+### 1. PURPOSE (BINDING)
+
+Execution-oriented overlays (e.g. checklist consumption, code execution,
+debugging in service of execution) may not proceed unless this gate
+explicitly grants eligibility.
+
+Eligibility is binary:
+- Eligible
+- Not eligible
+
+------------------------------------------------------------
+
+### 2. REQUIRED INPUTS (AUTHORITATIVE)
+
+This gate may consider **only** the following authoritative inputs:
+
+- A **locked, authoritative checklist** for the target phase
+- A completed **File Discovery & Access Negotiation** outcome, including:
+  - Files requested
+  - Files provided
+  - Files denied or missing
+- The **verbatim contents** of any files provided by the user in this conversation
+
+No other conversation content may be used.
+
+------------------------------------------------------------
+
+### 3. MATERIALIZATION CRITERIA
+
+A file is considered **materialized** only if:
+
+- Its full contents have been provided verbatim by the user
+- It was provided in the current conversation
+- It corresponds to a path identified during file discovery
+
+File references, summaries, prior conversations, or inferred structure
+do **not** constitute materialization.
+
+------------------------------------------------------------
+
+### 4. ELIGIBILITY DETERMINATION
+
+The assistant must evaluate:
+
+- Which checklist items require access to which files
+- Whether all such files are materialized
+
+The assistant must then produce exactly one determination:
+
+BEGIN ARTIFACT: EXECUTION_ELIGIBILITY[::<identifier>]
+eligible: <yes | no>
+files_present:
+  - <relative/path>
+files_missing:
+  - <relative/path>
+scope_of_authority:
+  - Locked checklist
+  - Listed materialized files only
+END ARTIFACT
+
+No other output is permitted.
+
+------------------------------------------------------------
+
+### 5. HARD STOP ON INELIGIBILITY
+
+If `eligible: no`:
+
+- No execution, planning, or interpretation may occur
+- The assistant must request **exactly one** missing file
+- The assistant must then stop
+
+------------------------------------------------------------
+
+### 6. EXECUTION AUTHORIZATION REQUIREMENT
+
+If `eligible: yes`:
+
+- No execution may occur until the user provides **explicit execution authorization**
+- Authorization must be unambiguous (e.g. “Execution authorized”)
+
+------------------------------------------------------------
+
+### 7. NON-ACCUMULATION GUARANTEE
+
+Eligibility applies **only** to:
+- The specific checklist
+- The specific set of materialized files listed in the artifact
+
+Any change to files, checklist, or scope **invalidates eligibility**
+and requires re-evaluating this gate.
+
+============================================================
+
+
+============================================================
+
 ## MANDATORY COMPREHENSION GATE (PRE-EXECUTION)
 
 Before executing **Checklist Item 1**, the assistant must:
