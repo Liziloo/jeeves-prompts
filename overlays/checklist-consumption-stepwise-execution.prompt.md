@@ -103,7 +103,8 @@ If any required input is missing, request **one** clarifying item and stop.
 This clause governs how authority is created, transferred, and consumed
 across stages within a conversation.
 
-It applies to **all overlays that produce or consume structured artifacts**.
+In this overlay, the assistant **consumes** authoritative artifacts but does
+**not** produce new authoritative artifacts unless explicitly stated.
 
 ------------------------------------------------------------
 
