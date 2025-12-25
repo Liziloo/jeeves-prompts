@@ -208,9 +208,7 @@ This gate must be satisfied before the Mandatory Comprehension Gate may be enter
 
 ### 1. PURPOSE (BINDING)
 
-Execution-oriented overlays (e.g. checklist consumption, code execution,
-debugging in service of execution) may not proceed unless this gate
-explicitly grants eligibility.
+Execution-oriented behavior under this overlay (including checklist consumption, code execution, and debugging in service of execution) may not proceed unless this gate explicitly grants eligibility.
 
 Eligibility is binary:
 - Eligible
@@ -268,6 +266,8 @@ END ARTIFACT
 
 No other output is permitted.
 
+The EXECUTION_ELIGIBILITY artifact may be emitted exactly once; any invalidation requires restarting this overlay.
+
 ------------------------------------------------------------
 
 ### 5. HARD STOP ON INELIGIBILITY
@@ -319,7 +319,7 @@ Execution may proceed **only after explicit user confirmation**.
 
 For **Checklist Item N**, the assistant must output:
 
-1. **Proposed changes (no execution implied)**
+1. **Proposed changes for this checklist item (execution pending user GO)**
 2. **Files that would be touched**
 3. **How the change would be verified**
    Verification instructions must:
